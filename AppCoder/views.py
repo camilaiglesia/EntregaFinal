@@ -14,7 +14,7 @@ def crear_usuario(request, nombre, apellido, mail):
     save_usuario = Usuario(nombre = nombre, apellido= apellido, mail = mail)
     save_usuario.save()
     context = { "nombre": nombre}
-    return render(request, "AppCoder/save_usuarios.html", context=context)
+    return render(request, "AppCoder/save_usuario.html", context=context)
     
 
 def bienes(request):

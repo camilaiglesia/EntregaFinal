@@ -8,7 +8,7 @@ class Usuario(models.Model):
     mail = models.EmailField()
     
     def __str__(self):
-        return f"Nombre: {self.nombre}, Apellido: {self.caracteristica}, Mail: {self.mail}"
+        return f"Nombre: {self.nombre}, Apellido: {self.apellido}, Mail: {self.mail}"
     
     
 class Compra(models.Model):
