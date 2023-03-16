@@ -31,8 +31,22 @@ def crear_bien(request, nombre, caracteristica):
 
 def compras(request):
     all_compras = Compra.objects.all()
-    return render(request, "AppCoder/compras.html")
+    context = {"compras": all_compras}
+    return render(request, "AppCoder/compras.html", context=context)
+
+def crear_compra(request, producto, precio):
+    save_compra = Compra(producto = producto, precio= int(precio))
+    save_compra.save()
+    context = { "producto": producto}
+    return render(request, "AppCoder/save_compra.html", context=context)
 
 def ventas(request):
     all_ventas = Venta.objects.all()
-    return render(request, "AppCoder/ventas.html")
+    context = {"ventas": all_ventas}
+    return render(request, "AppCoder/ventas.html", context=context)
+
+def crear_venta(request, producto, precio):
+    save_venta = Venta(producto = producto, precio= int(precio))
+    save_venta.save()
+    context = { "producto": producto}
+    return render(request, "AppCoder/save_venta.html", context=context)
