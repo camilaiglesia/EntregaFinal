@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block contenido_cambia %}
+    {% if ventas  %}
+    {% for venta in ventas  %}
+        <p>Producto: {{venta.producto}} </p>
+        <p>Precio: {{venta.precio}} </p>
+        
+    {% endfor %}
+    {% else %}
+        No se realizaron ventas
+    
+    {% endif %}
+        
+{% endblock  %}

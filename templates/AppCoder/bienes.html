@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block contenido_cambia %}
+    {% if bienes  %}
+    {% for bien in bienes  %}
+        <p>Nombre: {{bien.nombre}} </p>
+        <p>Caracteristica: {{bien.caracteristica}} </p>
+        
+    {% endfor %}
+    {% else %}
+        No hay bienes cargados por el momento
+    
+    {% endif %}
+        
+{% endblock  %}
