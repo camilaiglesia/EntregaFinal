@@ -1,5 +1,5 @@
 from django.urls import path
-from AppCoder.views import usuarios, compras, ventas, crear_usuario, bienes, crear_bien, crear_compra, crear_venta
+from AppCoder.views import usuarios, compras, ventas, crear_usuario, bienes, crear_bien, crear_compra, crear_venta, busqueda_bien
 
 urlpatterns = [
     path('usuarios', usuarios, name="AppCoderUsuarios" ),
@@ -9,5 +9,6 @@ urlpatterns = [
     path('usuario/<nombre>/<apellido>/<mail>', crear_usuario, name="AppCoderUsuario"),
     path('bien/<nombre>/<caracteristica>', crear_bien, name="AppCoderBien"),
     path('compra/<producto>/<precio>', crear_compra, name="AppCoderCompra"),
-    path('venta/<producto>/<precio>', crear_venta, name="AppCoderVenta")
+    path('venta/<producto>/<precio>', crear_venta, name="AppCoderVenta"),
+    path('busqueda_bien', busqueda_bien, name="AppCoderBuscarBien")
     ]

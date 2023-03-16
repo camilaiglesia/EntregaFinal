@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block contenido_cambia %}
+    {% if bienes %}
+        {% for bien in bienes  %}
+            <p> {{bien}}</p>
+
+        
+        {% endfor %}
+    {% else %}
+        <h3>No hay bienes filtrados<h3/>
+    
+    {% endif %}
+
+
+
+{% endblock  %}

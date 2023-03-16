@@ -1,9 +1,15 @@
 {% extends 'base.html' %}
 
 {% block contenido_cambia %}
+    <form action= "{% url 'AppCoderVentas'%}" method= "post">
+        <b>AGREGAR PRODUCTO PARA VENDER:</b>
+        <br>{% csrf_token %}</br>
+        {{ form.as_p }}
+        <input type="submit" value="Enviar">
+    </form>
     {% if ventas  %}
     {% for venta in ventas  %}
-        <p>Producto: {{venta.producto}} </p>
+        Producto: {{venta.producto}} 
         <p>Precio: {{venta.precio}} </p>
         
     {% endfor %}

@@ -1,9 +1,22 @@
 {% extends 'base.html' %}
 
 {% block contenido_cambia %}
+    <form action= "{% url 'AppCoderBienes'%}" method= "post"> 
+        <b>AGREGAR PRODUCTO:</b>
+        <br>{% csrf_token %}</br>
+        {{ form.as_p }}
+    <input type="submit" value="Crear">
+    </form>
+    <br><hr>
+    <form action="{% url 'AppCoderBuscarBien' %}">
+        <b>BUSCAR PRODUCTO:</b><br>
+        <br>{{ form_busqueda.as_p }}
+    <input type="submit" value="Buscar">   
+    </form>
+    <hr><br>
     {% if bienes  %}
     {% for bien in bienes  %}
-        <p>Nombre: {{bien.nombre}} </p>
+        Nombre: {{bien.nombre}} 
         <p>Caracteristica: {{bien.caracteristica}} </p>
         
     {% endfor %}

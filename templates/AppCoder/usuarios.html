@@ -1,11 +1,17 @@
 {% extends 'base.html' %}
 
 {% block contenido_cambia %}
+    <form action= "{% url 'AppCoderUsuarios'%}" method= "post"> 
+        <b>AGREGAR USUARIO:</b>
+        <br>{% csrf_token %}</br>
+        {{ form.as_p }}
+        <input type="submit" value="Crear">
+    </form>
     {% if usuarios  %}
     {% for usuario in usuarios  %}
-        <p>Nombre: {{usuario.nombre}} </p>
-        <p>Apellido: {{usuario.apellido}} </p>
-        <p>Mail: {{usuario.mail}} </p>
+        Nombre: {{usuario.nombre}} 
+        <p>Apellido: {{usuario.apellido}} <p> 
+        Mail: {{usuario.mail}} </p>
     {% endfor %}
     {% else %}
         No hay usuarios registrados por el momento
