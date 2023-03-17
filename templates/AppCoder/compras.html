@@ -5,7 +5,7 @@
         <b>AGREGAR PRODUCTO PARA COMPRAR:</b>
         <br>{% csrf_token %}</br>
         {{ form.as_p }}
-        <input type="submit" value="Enviar">
+        <input type="submit" value="Agregar">
     </form>
     {% if compras  %}
     {% for compra in compras  %}

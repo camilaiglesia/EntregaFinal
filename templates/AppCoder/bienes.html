@@ -5,7 +5,7 @@
         <b>AGREGAR PRODUCTO:</b>
         <br>{% csrf_token %}</br>
         {{ form.as_p }}
-    <input type="submit" value="Crear">
+    <input type="submit" value="Agregar">
     </form>
     <br><hr>
     <form action="{% url 'AppCoderBuscarBien' %}">

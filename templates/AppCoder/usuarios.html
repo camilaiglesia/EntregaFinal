@@ -2,10 +2,10 @@
 
 {% block contenido_cambia %}
     <form action= "{% url 'AppCoderUsuarios'%}" method= "post"> 
-        <b>AGREGAR USUARIO:</b>
+        <b>REGISTRAR USUARIO:</b>
         <br>{% csrf_token %}</br>
         {{ form.as_p }}
-        <input type="submit" value="Crear">
+        <input type="submit" value="Registrar">
     </form>
     {% if usuarios  %}
     {% for usuario in usuarios  %}
