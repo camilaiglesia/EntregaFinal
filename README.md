@@ -7,8 +7,8 @@ Este es un proyecto de software que se utiliza para la compra y venta de product
 <b>Fucionalidades<br></b>
 -Registrar usuarios (Nombre, Apellido y Mail) <br>
 -Agregar productos (Producto y Precio) y buscar el que desee en la base de datos por medio del nombre del producto<br>
--Agregar productos para comprar y/p vender
+-Agregar productos para comprar y/o vender
 
 <b>Instalacion<br></b>
-Descarga el repositorio del proyecto desde GitHub
+Descarga el repositorio del proyecto desde GitHub.
 
