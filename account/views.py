@@ -4,9 +4,21 @@ from django.contrib.auth import login,logout,authenticate
 from account.forms import UserRegisterForm
 
 def editar_usuario(request):
-    
     user = request.user   #capturo usuario
-    
+  
+    if request.method == "POST":
+        #form = UserCreationForm(request.POST)
+        form = UserRegisterForm(request.POST)
+        
+        if form.is_valid():
+            informacion = form.cleaned_data
+            user.username = informacion["username"]
+            user.email= informacion["email"]
+            user.is_staff= informacion["is_staff"]
+            
+            user.save()
+            return redirect("accountLogin")
+
     form = UserRegisterForm(initial={
         "username":user.username, 
         "email":user.email,     #tengo que estar loggeada
