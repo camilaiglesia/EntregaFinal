@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from AppCoder.models import Usuario, Compra, Venta, Bien
-from AppCoder.forms import UsuarioForm, BienForm, CompraForm, VentaForm, BusquedaBienForm
+from AppCoder.models import Compra, Venta, Bien
+from AppCoder.forms import BienForm, CompraForm, VentaForm, BusquedaBienForm
 from django.contrib.auth.decorators import login_required
 
 def busqueda_bien(request):
@@ -14,30 +14,7 @@ def busqueda_bien(request):
         return render(request, "AppCoder/busqueda_bien.html", context=context)
 
 
-def usuarios(request):
-    if request.method == "POST":
-        mi_formulario= UsuarioForm(request.POST)
-        
-        if mi_formulario.is_valid():
-            informacion = mi_formulario.cleaned_data
-            usuario_save = Usuario(nombre=informacion["nombre"],
-                                   apellido = informacion["apellido"],
-                                   mail = informacion["mail"])
-            usuario_save.save()
-            
-    all_usuarios = Usuario.objects.all()
-    context = {"usuarios" : all_usuarios,
-               "form": UsuarioForm()
-               }
-    
-    return render(request, "AppCoder/usuarios.html", context=context)
 
-def crear_usuario(request, nombre, apellido, mail):
-    save_usuario = Usuario(nombre = nombre, apellido= apellido, mail = mail)
-    save_usuario.save()
-    context = { "nombre": nombre}
-    return render(request, "AppCoder/save_usuario.html", context=context)
-    
 def crear_bien(request):
     if request.method == "POST":
         formBienes= BienForm(request.POST)

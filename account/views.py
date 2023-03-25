@@ -29,7 +29,7 @@ def editar_usuario(request):
         "titulo": "Editar usuario",
         "enviar": "Editar"
     }
-    return render(request, "account/form.html", context=context)
+    return render(request, "form.html", context=context)
 
 def register_account(request):
     if request.method == "POST":
@@ -43,10 +43,10 @@ def register_account(request):
     form = UserRegisterForm()
     context = {
         "form" : form,
-        "titulo": "Registra usuario",
+        "titulo": "Registrar usuario",
         "enviar": "Registrar"
     }
-    return render(request, "account/form.html", context=context)
+    return render(request, "form.html", context=context)
             
 
 
@@ -63,9 +63,9 @@ def login_account(request):
                 login(request, user)
                 
                 
-                return render(request, "account/form.html", context={"mensajes": ["Has iniciado sesion exitosamente"]})
+                return render(request, "form.html", context={"mensajes": ["Has iniciado sesion exitosamente"]})
             else:
-                return render(request, "account/form.html", context={"mensajes": ["Intente nuevamente"]})
+                return render(request, "form.html", context={"mensajes": ["Intente nuevamente"]})
             
 
     form = AuthenticationForm()
@@ -74,4 +74,4 @@ def login_account(request):
         "titulo": "Login",
         "enviar": "Iniciar"
     }
-    return render(request, "account/form.html", context=context)
+    return render(request, "form.html", context=context)

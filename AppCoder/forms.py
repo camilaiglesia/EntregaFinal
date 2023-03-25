@@ -1,13 +1,9 @@
 from enum import unique
 from django import forms
 
-class UsuarioForm(forms.Form):
-    nombre = forms.CharField(min_length=2, max_length=50)
-    apellido = forms.CharField(min_length=2, max_length=50)
-    mail = forms.EmailField()
+
     
-    
-    
+ 
 class BienForm(forms.Form):
     nombre = forms.CharField(min_length=2, max_length=50)
     caracteristica = forms.CharField(min_length=2, max_length=50)

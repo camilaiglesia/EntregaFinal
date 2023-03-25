@@ -1,10 +1,10 @@
 from django.contrib import admin
 
-from AppCoder.models import Usuario, Bien, Compra, Venta
+from AppCoder.models import Bien, Compra, Venta
 
 # Register your models here.
 
-admin.site.register(Usuario)
+
 
 admin.site.register(Bien)
 

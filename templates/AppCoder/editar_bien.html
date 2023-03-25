@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block contenido_cambia %}
-{#Creacion de producto#}
+
     <form action= "{% url "AppCoderEditarBien" nombre %}" method= "post"> 
         <br>{% csrf_token %}</br>
         {{ form.as_p }}

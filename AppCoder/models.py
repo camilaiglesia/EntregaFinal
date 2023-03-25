@@ -1,15 +1,6 @@
 from django.db import models
 
-# Create your models here.
-
-class Usuario(models.Model):
-    nombre = models.CharField(max_length=50)
-    apellido = models.CharField(max_length=50)
-    mail = models.EmailField(unique=True)
-    
-    def __str__(self):
-        return f"Nombre: {self.nombre}, Apellido: {self.apellido}, Mail: {self.mail}"
-    
+# Create your models here.  
     
 class Compra(models.Model):
     producto = models.CharField(max_length=50)
