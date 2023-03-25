@@ -2,7 +2,8 @@
 
 {% block contenido_cambia %}
     <h1>{{ titulo }}</h1>
-    <form method="POST">
+    
+    <form method="POST" enctype="multipart/form-data">   {#agrego el multipart/form para que acepte imagenes#}
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="{{enviar}}">
