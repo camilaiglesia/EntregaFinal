@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block contenido_cambia %}
+{#Creacion de producto#}
+    <form action= "{% url 'AppCoderCrearBien'%}" method= "post"> 
+        <b>AGREGAR PRODUCTO:</b>
+        <br>{% csrf_token %}</br>
+        {{ form.as_p }}
+    <input type="submit" value="Agregar">
+    </form>
+
+
+{% endblock %}

@@ -1,24 +1,26 @@
 {% extends 'base.html' %}
 
 {% block contenido_cambia %}
-    <form action= "{% url 'AppCoderBienes'%}" method= "post"> 
-        <b>AGREGAR PRODUCTO:</b>
-        <br>{% csrf_token %}</br>
-        {{ form.as_p }}
-    <input type="submit" value="Agregar">
-    </form>
+    {#Buscar producto#}
     <br><hr>
     <form action="{% url 'AppCoderBuscarBien' %}">
         <b>BUSCAR PRODUCTO:</b><br>
         <br>{{ form_busqueda.as_p }}
     <input type="submit" value="Buscar">   
     </form>
+
+    <hr><br>
+    <a href="{% url 'AppCoderCrearBien' %}">Creacion del producto</a>
+
+    {#Ver productos#}
     <hr><br>
     {% if bienes  %}
     {% for bien in bienes  %}
-        Nombre: {{bien.nombre}} 
-        <p>Caracteristica: {{bien.caracteristica}} </p>
+        <p>Nombre: {{bien.nombre}}, Caracteristica: {{bien.caracteristica}} </p>
         
+        <a href="{% url "AppCoderEliminarBien" bien.nombre %}">Eliminar</a>
+        <a href="{% url "AppCoderEditarBien" bien.nombre %}">Editar</a>
+        <p><hr>
     {% endfor %}
     {% else %}
         No hay bienes cargados por el momento

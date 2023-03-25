@@ -1,9 +1,8 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from AppCoder.models import Usuario, Compra, Venta, Bien
 from AppCoder.forms import UsuarioForm, BienForm, CompraForm, VentaForm, BusquedaBienForm
-
-# Create your views here.
+from django.contrib.auth.decorators import login_required
 
 def busqueda_bien(request):
     mi_formulario = BusquedaBienForm(request.GET)
@@ -13,8 +12,6 @@ def busqueda_bien(request):
         context = {"bienes": bienes_filtrados
                    }
         return render(request, "AppCoder/busqueda_bien.html", context=context)
-
-
 
 
 def usuarios(request):
@@ -41,8 +38,7 @@ def crear_usuario(request, nombre, apellido, mail):
     context = { "nombre": nombre}
     return render(request, "AppCoder/save_usuario.html", context=context)
     
-
-def bienes(request):
+def crear_bien(request):
     if request.method == "POST":
         formBienes= BienForm(request.POST)
         
@@ -52,16 +48,52 @@ def bienes(request):
                             caracteristica = informacion["caracteristica"]
                                    )
             bien_save.save()
+            return redirect("AppCoderBienes")
             
+    context = {
+        "form" : BienForm()
+    }
+    return render(request, "AppCoder/crear_bien.html",context=context)    
+
+def eliminar_bien(request,nombre):
+    get_bien= Bien.objects.get(nombre=nombre)
+    get_bien.delete()
+    return redirect("AppCoderBienes")
+
+def editar_bien(request,nombre):
+    get_bien= Bien.objects.get(nombre=nombre) 
+    
+    if request.method == "POST":
+        formBienes= BienForm(request.POST)
+        
+        if formBienes.is_valid():
+            informacion = formBienes.cleaned_data
+            
+            get_bien.nombre=informacion["nombre"]
+            get_bien.caracteristica = informacion["caracteristica"]
+                                   
+                            
+            get_bien.save()
+            return redirect("AppCoderBienes")
+           
+    context = {
+        "nombre": nombre,
+        "form" : BienForm(initial={
+            "nombre":get_bien.nombre,
+            "caracteristica":get_bien.caracteristica
+        })
+    }
+    return render(request, "AppCoder/editar_bien.html",context=context) 
+
+def bienes(request):
     all_bienes = Bien.objects.all()
     context = {"bienes" : all_bienes,
-               "form": BienForm(),
                 "form_busqueda": BusquedaBienForm()
                 } 
     return render(request, "AppCoder/bienes.html", context=context)
 
 
-def crear_bien(request, nombre, caracteristica):
+def crear_bien1(request, nombre, caracteristica):
     save_bien = Bien(nombre = nombre, caracteristica= caracteristica)
     save_bien.save()
     context = { "nombre": nombre}
