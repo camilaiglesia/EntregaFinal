@@ -17,10 +17,13 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
+
 from Tercera_pre_entrega_Iglesia import settings
+from account.views import login_account
 
 
 urlpatterns = [
+    path('', login_account, name= "accountLogin"),
     path('admin/', admin.site.urls),
     path('coder/', include('AppCoder.urls')),  #incluyo las urls de la aplicacion
     path('account/', include('account.urls'))

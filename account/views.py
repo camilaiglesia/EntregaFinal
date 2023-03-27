@@ -82,3 +82,7 @@ def login_account(request):
         "enviar": "Iniciar"
     }
     return render(request, "form.html", context=context)
+
+
+def inicio(request):
+    return redirect("accountLogin")

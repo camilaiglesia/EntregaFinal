@@ -117,3 +117,6 @@ def crear_venta(request, producto, precio):
     save_venta.save()
     context = { "producto": producto}
     return render(request, "AppCoder/save_venta.html", context=context)
+
+def about(request):
+    return render(request, 'about.html', {})

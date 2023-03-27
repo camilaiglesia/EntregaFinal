@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block contenido_cambia %}
+    <form method= "post">
+        <h1><b>Acerca de mi</b></h1>
+        <p>Hola!
+        <p>Mi nombre es Camila Iglesia.<p>Actualmente estoy cursando Python en CoderHouse. 
+        <p>Registrandote podras encontrar productos para comprar y vender, y agregar aquellos productos que no se encuentren en la pagina.
+        <p>Espero que te guste!
+
+        
+        <br>{% csrf_token %}</br>
+        {{ form.as_p }}
+       
+    </form>
+    
+        
+{% endblock  %}
+
