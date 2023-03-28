@@ -1,12 +1,15 @@
 from enum import unique
 from django import forms
 
+from AppCoder.models import Bien
+
 
     
  
-class BienForm(forms.Form):
-    nombre = forms.CharField(min_length=2, max_length=50)
-    caracteristica = forms.CharField(min_length=2, max_length=50)
+class BienForm(forms.ModelForm):
+    class Meta:
+        model = Bien
+        fields = ("titulo","subtitulo","descripcion","imagen")
     
 class BusquedaBienForm(forms.Form):
     nombre = forms.CharField(min_length=2, max_length=50)

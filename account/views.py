@@ -1,3 +1,4 @@
+import logging
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login,logout,authenticate
@@ -41,8 +42,10 @@ def editar_usuario(request):
 def register_account(request):
     if request.method == "POST":
         #form = UserCreationForm(request.POST)
-        form = UserRegisterForm(request.POST)
+        form = UserRegisterForm(request.POST, request.FILES)
+        logging.error(form.errors)
         if form.is_valid():
+            logging.error("Estamos guardando")
             form.save()
             return redirect("accountLogin")
         

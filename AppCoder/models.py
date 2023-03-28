@@ -1,4 +1,7 @@
+
 from django.db import models
+from django.contrib.auth.models import User
+
 
 # Create your models here.  
     
@@ -18,8 +21,10 @@ class Venta(models.Model):
         return f"Producto: {self.producto}, Precio: {self.precio}"
     
 class Bien(models.Model):
-    nombre = models.CharField(max_length=50)
-    caracteristica= models.CharField(max_length=50)
-    
+    usuario = models.ForeignKey(to=User, on_delete=models.CASCADE)
+    titulo = models.CharField(max_length=50)
+    subtitulo = models.CharField(max_length=50)
+    descripcion = models.TextField()
+    imagen = models.ImageField(upload_to="bienes", null=True, blank=True)
     def __str__(self):
         return f"Nombre: {self.nombre}, Caracteristica: {self.caracteristica}"

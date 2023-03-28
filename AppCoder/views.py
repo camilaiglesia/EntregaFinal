@@ -17,13 +17,17 @@ def busqueda_bien(request):
 
 def crear_bien(request):
     if request.method == "POST":
-        formBienes= BienForm(request.POST)
+        formBienes= BienForm(request.POST, request.FILES)
         
         if formBienes.is_valid():
             informacion = formBienes.cleaned_data
-            bien_save = Bien(nombre=informacion["nombre"],
-                            caracteristica = informacion["caracteristica"]
-                                   )
+            bien_save = Bien(
+                titulo=informacion["titulo"],
+                subtitulo = informacion["subtitulo"],
+                usuario = request.user,
+                imagen=informacion["imagen"],
+                descripcion=informacion["descripcion"]
+            )
             bien_save.save()
             return redirect("AppCoderBienes")
             
