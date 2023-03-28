@@ -2,7 +2,7 @@
 
 {% block contenido_cambia %}
 {#Creacion de producto#}
-    <form action= "{% url 'AppCoderCrearBien'%}" method= "post"> 
+    <form action= "{% url 'AppCoderCrearBien'%}" method= "post" enctype="multipart/form-data"> 
         <b>AGREGAR PRODUCTO:</b>
         <br>{% csrf_token %}</br>
         {{ form.as_p }}

@@ -16,10 +16,11 @@
     <hr><br>
     {% if bienes  %}
     {% for bien in bienes  %}
-        <p>Titulo: {{bien.titulo}}, Subtitulo: {{bien.subtitulo}} </p>
+        <p>Titulo: {{bien.titulo}}<br> Subtitulo: {{bien.subtitulo}} </p>
         
         <a href="{% url "AppCoderEliminarBien" bien.titulo %}">Eliminar</a>
         <a href="{% url "AppCoderEditarBien" bien.titulo %}">Editar</a>
+        <a href="{% url "AppCoderDetalleBien" bien.titulo %}">Detalle</a>
         <p><hr>
     {% endfor %}
     {% else %}

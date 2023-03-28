@@ -1,7 +1,8 @@
 from django.urls import path
-from AppCoder.views import about, editar_bien, eliminar_bien, compras, ventas,bienes, crear_bien, crear_compra, crear_venta, busqueda_bien
+from AppCoder.views import about, detalle_bien, editar_bien, eliminar_bien, compras, ventas,bienes, crear_bien, crear_compra, crear_venta, busqueda_bien
 
 urlpatterns = [
+    path('bienes/detalle/<titulo>', detalle_bien ,name="AppCoderDetalleBien"),
     path('about', about,name="AppCoderAbout"),
     path('compras', compras,name="AppCoderCompras"),
     path('ventas', ventas, name="AppCoderVentas"),

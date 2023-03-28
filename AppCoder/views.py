@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from AppCoder.models import Compra, Venta, Bien
-from AppCoder.forms import BienForm, CompraForm, VentaForm, BusquedaBienForm
+from AppCoder.forms import BienForm, Comentario, CompraForm, VentaForm, BusquedaBienForm
 from django.contrib.auth.decorators import login_required
 
 def busqueda_bien(request):
@@ -45,19 +45,32 @@ def eliminar_bien(request,titulo):
     }
     return render(request,"AppCoder/bienes.html", context=context)
 
+def detalle_bien(request,titulo):
+    get_bien=Bien.objects.get(titulo=titulo)
+    if request.method == "POST":
+            pass
+           
+    context = {
+        "titulo": titulo,
+        "bien": get_bien,
+    }
+    return render(request, "AppCoder/detalle_bien.html",context=context)     
+
+
 def editar_bien(request,titulo):
     get_bien= Bien.objects.get(titulo=titulo) 
     
     if request.method == "POST":
-        formBienes= BienForm(request.POST)
-        
+        formBienes= BienForm(request.POST,request.FILES)
+       
         if formBienes.is_valid():
             informacion = formBienes.cleaned_data
             
             get_bien.titulo=informacion["titulo"]
             get_bien.subtitulo = informacion["subtitulo"]
-                                   
-                            
+            get_bien.descripcion = informacion["descripcion"]                       
+            get_bien.imagen = informacion["imagen"]       
+                     
             get_bien.save()
             return redirect("AppCoderBienes")
            
@@ -65,9 +78,12 @@ def editar_bien(request,titulo):
         "titulo": titulo,
         "form" : BienForm(initial={
             "titulo":get_bien.titulo,
-            "subtitulo":get_bien.subtitulo
+            "subtitulo":get_bien.subtitulo,
+            "imagen.url": get_bien.imagen.url if get_bien.imagen else None
+            
         })
     }
+    
     return render(request, "AppCoder/editar_bien.html",context=context) 
 
 def bienes(request):

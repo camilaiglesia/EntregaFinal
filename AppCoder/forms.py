@@ -3,7 +3,11 @@ from django import forms
 
 from AppCoder.models import Bien
 
-
+ 
+class Comentario(forms.ModelForm):
+    class Meta:
+        model = Bien
+        fields = ("titulo","subtitulo","descripcion","imagen")
     
  
 class BienForm(forms.ModelForm):
