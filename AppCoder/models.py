@@ -27,4 +27,4 @@ class Bien(models.Model):
     descripcion = models.TextField()
     imagen = models.ImageField(upload_to="bienes", null=True, blank=True)
     def __str__(self):
-        return f"Nombre: {self.nombre}, Caracteristica: {self.caracteristica}"
+        return f"Titulo: {self.titulo}, Subtitulo: {self.subtitulo}"

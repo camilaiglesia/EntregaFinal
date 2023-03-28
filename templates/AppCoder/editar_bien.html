@@ -2,7 +2,7 @@
 
 {% block contenido_cambia %}
 
-    <form action= "{% url "AppCoderEditarBien" nombre %}" method= "post"> 
+    <form action= "{% url "AppCoderEditarBien" titulo %}" method= "post"> 
         <br>{% csrf_token %}</br>
         {{ form.as_p }}
     <input type="submit" value="Editar">

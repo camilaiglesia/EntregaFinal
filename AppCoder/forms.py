@@ -12,7 +12,7 @@ class BienForm(forms.ModelForm):
         fields = ("titulo","subtitulo","descripcion","imagen")
     
 class BusquedaBienForm(forms.Form):
-    nombre = forms.CharField(min_length=2, max_length=50)
+    titulo = forms.CharField(min_length=2, max_length=50)
     
   
     

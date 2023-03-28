@@ -8,7 +8,7 @@ def busqueda_bien(request):
     mi_formulario = BusquedaBienForm(request.GET)
     if mi_formulario.is_valid():
         informacion = mi_formulario.cleaned_data
-        bienes_filtrados = Bien.objects.filter(nombre__icontains=informacion["nombre"])
+        bienes_filtrados = Bien.objects.filter(titulo__icontains=informacion["titulo"])
         context = {"bienes": bienes_filtrados
                    }
         return render(request, "AppCoder/busqueda_bien.html", context=context)
@@ -36,13 +36,17 @@ def crear_bien(request):
     }
     return render(request, "AppCoder/crear_bien.html",context=context)    
 
-def eliminar_bien(request,nombre):
-    get_bien= Bien.objects.get(nombre=nombre)
-    get_bien.delete()
-    return redirect("AppCoderBienes")
+def eliminar_bien(request,titulo):
+    bien = Bien.objects.get(titulo = titulo)
+    bien.delete()
+    bien = Bien.objects.all()
+    context = {
+        "bienes": bienes
+    }
+    return render(request,"AppCoder/bienes.html", context=context)
 
-def editar_bien(request,nombre):
-    get_bien= Bien.objects.get(nombre=nombre) 
+def editar_bien(request,titulo):
+    get_bien= Bien.objects.get(titulo=titulo) 
     
     if request.method == "POST":
         formBienes= BienForm(request.POST)
@@ -50,18 +54,18 @@ def editar_bien(request,nombre):
         if formBienes.is_valid():
             informacion = formBienes.cleaned_data
             
-            get_bien.nombre=informacion["nombre"]
-            get_bien.caracteristica = informacion["caracteristica"]
+            get_bien.titulo=informacion["titulo"]
+            get_bien.subtitulo = informacion["subtitulo"]
                                    
                             
             get_bien.save()
             return redirect("AppCoderBienes")
            
     context = {
-        "nombre": nombre,
+        "titulo": titulo,
         "form" : BienForm(initial={
-            "nombre":get_bien.nombre,
-            "caracteristica":get_bien.caracteristica
+            "titulo":get_bien.titulo,
+            "subtitulo":get_bien.subtitulo
         })
     }
     return render(request, "AppCoder/editar_bien.html",context=context) 
@@ -74,10 +78,10 @@ def bienes(request):
     return render(request, "AppCoder/bienes.html", context=context)
 
 
-def crear_bien1(request, nombre, caracteristica):
-    save_bien = Bien(nombre = nombre, caracteristica= caracteristica)
+def crear_bien1(request, titulo, subtitulo):
+    save_bien = Bien(titulo = titulo, subtitulo= subtitulo)
     save_bien.save()
-    context = { "nombre": nombre}
+    context = { "titulo": titulo}
     return render(request, "AppCoder/save_bien.html", context=context)
 
 def compras(request):

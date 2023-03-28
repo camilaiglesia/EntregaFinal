@@ -18,8 +18,8 @@
     {% for bien in bienes  %}
         <p>Titulo: {{bien.titulo}}, Subtitulo: {{bien.subtitulo}} </p>
         
-        <a href="{% url "AppCoderEliminarBien" bien.id %}">Eliminar</a>
-        <a href="{% url "AppCoderEditarBien" bien.id %}">Editar</a>
+        <a href="{% url "AppCoderEliminarBien" bien.titulo %}">Eliminar</a>
+        <a href="{% url "AppCoderEditarBien" bien.titulo %}">Editar</a>
         <p><hr>
     {% endfor %}
     {% else %}
