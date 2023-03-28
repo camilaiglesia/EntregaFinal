@@ -4,11 +4,9 @@ from django import forms
 from AppCoder.models import Bien
 
  
-class Comentario(forms.ModelForm):
-    class Meta:
-        model = Bien
-        fields = ("titulo","subtitulo","descripcion","imagen")
-    
+class ComentarForm(forms.ModelForm):
+    comentario = forms.CharField(min_length=2, max_length=200)
+ 
  
 class BienForm(forms.ModelForm):
     class Meta:
@@ -25,8 +23,4 @@ class CompraForm(forms.Form):
     precio = forms.IntegerField()
    
    
-    
-class VentaForm(forms.Form):
-    producto = forms.CharField(min_length=2, max_length=50)
-    precio = forms.IntegerField()
     

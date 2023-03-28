@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from AppCoder.models import Compra, Venta, Bien
-from AppCoder.forms import BienForm, Comentario, CompraForm, VentaForm, BusquedaBienForm
+from AppCoder.models import Comentar, Compra, Bien
+from AppCoder.forms import BienForm, CompraForm, BusquedaBienForm
 from django.contrib.auth.decorators import login_required
 
 def busqueda_bien(request):
@@ -43,7 +43,7 @@ def eliminar_bien(request,titulo):
     context = {
         "bienes": bienes
     }
-    return render(request,"AppCoder/bienes.html", context=context)
+    return redirect("AppCoderBienes")
 
 def detalle_bien(request,titulo):
     get_bien=Bien.objects.get(titulo=titulo)
@@ -69,8 +69,8 @@ def editar_bien(request,titulo):
             get_bien.titulo=informacion["titulo"]
             get_bien.subtitulo = informacion["subtitulo"]
             get_bien.descripcion = informacion["descripcion"]                       
-            get_bien.imagen = informacion["imagen"]       
-                     
+            get_bien.imagen = informacion["imagen"] 
+                 
             get_bien.save()
             return redirect("AppCoderBienes")
            
@@ -121,26 +121,9 @@ def crear_compra(request, producto, precio):
     context = { "producto": producto}
     return render(request, "AppCoder/save_compra.html", context=context)
 
-def ventas(request):
-    if request.method == "POST":
-        formVentas= VentaForm(request.POST)
-        
-        if formVentas.is_valid():
-            informacion = formVentas.cleaned_data
-            venta_save = Venta(producto=informacion["producto"],
-                                   precio = informacion["precio"]
-                                   )
-            venta_save.save()
-    all_ventas = Venta.objects.all()
-    context = {"ventas": all_ventas,
-               "form": VentaForm()}
-    return render(request, "AppCoder/ventas.html", context=context)
-
-def crear_venta(request, producto, precio):
-    save_venta = Venta(producto = producto, precio= int(precio))
-    save_venta.save()
-    context = { "producto": producto}
-    return render(request, "AppCoder/save_venta.html", context=context)
-
+def panel_admin(request):
+    return redirect('/admin/login/?next=/admin/')
+    
 def about(request):
     return render(request, 'about.html', {})
+
