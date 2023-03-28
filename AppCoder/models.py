@@ -25,3 +25,9 @@ class Bien(models.Model):
 
 class Comentar(models.Model):
     comentario: models.CharField(max_length=200)
+    
+class Profile(models.Model):
+    username = models.CharField(max_length=50)
+    email= models.EmailField()
+    
+    

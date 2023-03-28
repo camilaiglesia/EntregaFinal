@@ -127,3 +127,13 @@ def panel_admin(request):
 def about(request):
     return render(request, 'about.html', {})
 
+def profile(request):
+    user=request.user
+    context = {
+        "usuario": user.username,
+        "email": user.email,
+        
+        
+    }
+    return render(request,'AppCoder/profile.html', context=context) 
+    

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block contenido_cambia %}
+<form action= "{% url "AppCoderProfile"%}" method= "post"> 
+    <br>{% csrf_token %}</br>
+   <b> Usuario: </b>{{user.username}}<br><b>Email: </b>{{user.email}}<br>
+
+
+
+</form>
+
+
+{% endblock %}
