@@ -1,9 +1,6 @@
 from django.contrib import admin
 
-from AppCoder.models import Bien, Compra
-
-# Register your models here.
+from AppCoder.models import Bien
 
 admin.site.register(Bien)
 
-admin.site.register(Compra)

@@ -14,12 +14,12 @@ def editar_usuario(request):
         if form.is_valid():
             informacion = form.cleaned_data
             user.username = informacion["username"]
-            user.email= informacion["email"]
-            
+            user.email = informacion["email"]
+           
             
             user.save()
-            return redirect("accountLogin")
-
+            return redirect("AppCoderProfile")
+    user.save()
     form = UserEditForm(initial={
         "username":user.username, 
         "email":user.email,     #tengo que estar loggeada
@@ -81,3 +81,4 @@ def login_account(request):
 
 def inicio(request):
     return redirect("accountLogin")
+

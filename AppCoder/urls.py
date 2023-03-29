@@ -4,7 +4,7 @@ from AppCoder.views import about, detalle_bien, editar_bien, eliminar_bien, comp
 urlpatterns = [
     path('bienes/detalle/<titulo>', detalle_bien ,name="AppCoderDetalleBien"),
     path('about', about,name="AppCoderAbout"),
-    path('compras', compras,name="AppCoderCompras"),
+    path('mensajes', compras,name="AppCoderCompras"),
     path('bienes', bienes,name="AppCoderBienes"),
     path('bienes/eliminar/<titulo>', eliminar_bien ,name="AppCoderEliminarBien"),
     path('bienes/editar/<titulo>', editar_bien ,name="AppCoderEditarBien"),

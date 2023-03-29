@@ -1,8 +1,10 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from AppCoder.models import Comentar, Compra, Bien
+from AppCoder.models import Compra, Bien, Profile
 from AppCoder.forms import BienForm, CompraForm, BusquedaBienForm
 from django.contrib.auth.decorators import login_required
+
+from account.models import Avatar
 
 def busqueda_bien(request):
     mi_formulario = BusquedaBienForm(request.GET)
@@ -57,6 +59,7 @@ def detalle_bien(request,titulo):
     return render(request, "AppCoder/detalle_bien.html",context=context)     
 
 
+    
 def editar_bien(request,titulo):
     get_bien= Bien.objects.get(titulo=titulo) 
     
@@ -72,7 +75,7 @@ def editar_bien(request,titulo):
             get_bien.imagen = informacion["imagen"] 
                  
             get_bien.save()
-            return redirect("AppCoderBienes")
+            return redirect("AppCoderProfile")
            
     context = {
         "titulo": titulo,
@@ -128,12 +131,4 @@ def about(request):
     return render(request, 'about.html', {})
 
 def profile(request):
-    user=request.user
-    context = {
-        "usuario": user.username,
-        "email": user.email,
-        
-        
-    }
-    return render(request,'AppCoder/profile.html', context=context) 
-    
+        return render(request,'AppCoder/profile.html') 

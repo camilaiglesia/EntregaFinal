@@ -1,5 +1,6 @@
 from enum import unique
 from django import forms
+from django.contrib.auth.models import User
 
 from AppCoder.models import Bien
 
@@ -22,5 +23,3 @@ class CompraForm(forms.Form):
     producto = forms.CharField(min_length=2, max_length=50)
     precio = forms.IntegerField()
    
-   
-    
