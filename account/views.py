@@ -9,14 +9,18 @@ def editar_usuario(request):
     user = request.user   #capturo usuario
   
     if request.method == "POST":
-        form = UserEditForm(request.POST)
+        form = UserEditForm(request.POST,request.FILES)
         
         if form.is_valid():
             informacion = form.cleaned_data
             user.username = informacion["username"]
             user.email = informacion["email"]
-           
-            
+        try:           #edicion
+            user.avatar.imagen= informacion["imagen"]
+        except:                   #creacion
+            avatar = Avatar(user=user, imagen=informacion["imagen"])
+            avatar.save()
+                       
             user.save()
             return redirect("AppCoderProfile")
     user.save()
@@ -33,16 +37,15 @@ def editar_usuario(request):
 
 def register_account(request):
     if request.method == "POST":
-        #form = UserCreationForm(request.POST)
+        
         form = UserRegisterForm(request.POST, request.FILES)
         logging.error(form.errors)
         if form.is_valid():
             logging.error("Estamos guardando")
             form.save()
             return redirect("accountLogin")
-        
-    #form = UserCreationForm()
-    form = UserRegisterForm()
+    else:
+        form = UserRegisterForm()
     context = {
         "form" : form,
         "titulo": "Registrar usuario",
@@ -82,3 +85,5 @@ def login_account(request):
 def inicio(request):
     return redirect("accountLogin")
 
+def profile(request):
+    return render(request,'AppCoder/profile.html') 

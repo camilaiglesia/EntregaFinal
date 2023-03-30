@@ -11,8 +11,8 @@ class UserRegisterForm(UserCreationForm):
         fields = ("username", "email", "imagen")
         
 class UserEditForm(forms.ModelForm):
-  
+    imagen= forms.ImageField()
     class Meta:
         model = User
-        fields = ['username', 'email']
+        fields = ['username', 'email','imagen']
        

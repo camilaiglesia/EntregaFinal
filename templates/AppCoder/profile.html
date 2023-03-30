@@ -3,8 +3,9 @@
 {% block contenido_cambia %}
 <form action= "{% url "AppCoderProfile"%}" method= "post"> 
     <br>{% csrf_token %}</br>
-   <b> Usuario: </b>{{user.username}}<br><b>Email: </b>{{user.email}}<br>
+   <b> Usuario: </b>{{user.username}}<br><b>Email: </b>{{user.email}}<br><b>Imagen: 
 
+<p><img src="{{ user.avatar.imagen.url }}" alt="" height="100 px"> </p>  
 
 
 </form>

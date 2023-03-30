@@ -1,9 +1,10 @@
-from django.http import HttpResponse
-from django.shortcuts import redirect, render
-from AppCoder.models import Compra, Bien, Profile
-from AppCoder.forms import BienForm, CompraForm, BusquedaBienForm
+from audioop import reverse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import get_object_or_404, redirect, render
+from AppCoder.models import  Comentario, Bien
+from AppCoder.forms import BienForm, ComentForm, BusquedaBienForm
 from django.contrib.auth.decorators import login_required
-
+from django.contrib.auth.models import User
 from account.models import Avatar
 
 def busqueda_bien(request):
@@ -103,26 +104,20 @@ def crear_bien1(request, titulo, subtitulo):
     context = { "titulo": titulo}
     return render(request, "AppCoder/save_bien.html", context=context)
 
-def compras(request):
+def comentarios(request):
     if request.method == "POST":
-        formCompras= CompraForm(request.POST)
+        formComent= ComentForm(request.POST)
         
-        if formCompras.is_valid():
-            informacion = formCompras.cleaned_data
-            compra_save = Compra(producto=informacion["producto"],
-                                   precio = informacion["precio"]
+        if formComent.is_valid():
+            informacion = formComent.cleaned_data
+            coment_save = Comentario(comentario=informacion["comentario"],
+                                   usuario = informacion["usuario"]
                                    )
-            compra_save.save()
-    all_compras = Compra.objects.all()
-    context = {"compras": all_compras,
-               "form": CompraForm()}
-    return render(request, "AppCoder/compras.html", context=context)
-
-def crear_compra(request, producto, precio):
-    save_compra = Compra(producto = producto, precio= int(precio))
-    save_compra.save()
-    context = { "producto": producto}
-    return render(request, "AppCoder/save_compra.html", context=context)
+            coment_save.save()
+    all_coment = Comentario.objects.all()
+    context = {"comentario": all_coment,
+               "form": ComentForm()}
+    return render(request, "AppCoder/comentarios.html", context=context)
 
 def panel_admin(request):
     return redirect('/admin/login/?next=/admin/')
@@ -130,5 +125,4 @@ def panel_admin(request):
 def about(request):
     return render(request, 'about.html', {})
 
-def profile(request):
-        return render(request,'AppCoder/profile.html') 
+

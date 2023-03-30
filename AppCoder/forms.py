@@ -5,9 +5,6 @@ from django.contrib.auth.models import User
 from AppCoder.models import Bien
 
  
-class ComentarForm(forms.ModelForm):
-    comentario = forms.CharField(min_length=2, max_length=200)
- 
  
 class BienForm(forms.ModelForm):
     class Meta:
@@ -19,7 +16,7 @@ class BusquedaBienForm(forms.Form):
     
   
     
-class CompraForm(forms.Form):
-    producto = forms.CharField(min_length=2, max_length=50)
-    precio = forms.IntegerField()
+class ComentForm(forms.Form):
+    comentario = forms.CharField(max_length=200)
+    
    

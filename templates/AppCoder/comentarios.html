@@ -1,16 +1,16 @@
 {% extends 'base.html' %}
 
 {% block contenido_cambia %}
-    <form action= "{% url 'AppCoderCompras'%}" method= "post"> 
-        <b>AGREGAR PRODUCTO PARA COMPRAR:</b>
+    <form action= "{% url 'AppCoderComentarios'%}" method= "post"> 
+        <b>Comentarios:</b>
         <br>{% csrf_token %}</br>
         {{ form.as_p }}
         <input type="submit" value="Agregar">
     </form>
-    {% if compras  %}
-    {% for compra in compras  %}
-        Producto: {{compra.producto}} 
-        <p>Precio: {{compra.precio}} </p>
+    {% if comentarios  %}
+    {% for comentario in comentarios  %}
+        Comentario: {{comentario.comentario}} 
+        <p>Usuario: {{comentario.usuario}} </p>
         
     {% endfor %}
     {% else %}

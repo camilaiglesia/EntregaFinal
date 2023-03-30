@@ -5,12 +5,12 @@ from django.contrib.auth.models import User
 
 # Create your models here.  
     
-class Compra(models.Model):
-    producto = models.CharField(max_length=50)
-    precio = models.IntegerField()
+class Comentario(models.Model):
+    comentario = models.CharField(max_length=200)
+    usuario = models.CharField(max_length=50)
     
     def __str__(self):
-        return f"Producto: {self.producto}, Precio: {self.precio}"
+        return f"comentario: {self.comentario}, usuario: {self.usuario}"
     
     
 
@@ -23,17 +23,6 @@ class Bien(models.Model):
     
     def __str__(self):
         return f"Titulo: {self.titulo}, Subtitulo: {self.subtitulo}"
-
-class Comentar(models.Model):
-    comentario: models.TextField(null=True, blank=True)
-    nombre = models.CharField(max_length=40)
-    fechaComentario = models.DateTimeField(auto_now_add=True)
-    
-    class Meta:
-        ordering = ['-fechaComentario']
-
-    def __str__(self):
-        return '%s - %s' % (self.nombre, self.comentario)
 
 class Profile(models.Model):
     usuario = models.CharField(max_length=50)
