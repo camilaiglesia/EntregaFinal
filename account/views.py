@@ -2,6 +2,7 @@ import logging
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login,logout,authenticate
+from AppCoder.models import Profile
 from account.forms import UserEditForm, UserRegisterForm
 from account.models import Avatar
 
@@ -10,16 +11,16 @@ def editar_usuario(request):
   
     if request.method == "POST":
         form = UserEditForm(request.POST,request.FILES)
-        
+        print(form.errors)
         if form.is_valid():
             informacion = form.cleaned_data
             user.username = informacion["username"]
             user.email = informacion["email"]
-        try:           #edicion
-            user.avatar.imagen= informacion["imagen"]
-        except:                   #creacion
-            avatar = Avatar(user=user, imagen=informacion["imagen"])
-            avatar.save()
+            try:           #edicion
+                user.avatar.imagen= informacion["imagen"]
+            except:                   #creacion
+                avatar = Avatar(user=user, imagen=informacion["imagen"])
+                avatar.save()
                        
             user.save()
             return redirect("AppCoderProfile")
@@ -86,4 +87,8 @@ def inicio(request):
     return redirect("accountLogin")
 
 def profile(request):
-    return render(request,'AppCoder/profile.html') 
+    user = request.user         #capturo usuario
+    context = {
+        'user': user,
+    }
+    return render(request, 'AppCoder/profile.html', context)

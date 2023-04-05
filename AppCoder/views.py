@@ -1,7 +1,7 @@
 from audioop import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
-from AppCoder.models import  Comentario, Bien
+from AppCoder.models import  Bien, Comentario
 from AppCoder.forms import BienForm, ComentForm, BusquedaBienForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -50,14 +50,31 @@ def eliminar_bien(request,titulo):
 
 def detalle_bien(request,titulo):
     get_bien=Bien.objects.get(titulo=titulo)
-    if request.method == "POST":
-            pass
+    get_comentarios = Comentario.objects.filter(bien=get_bien)
            
     context = {
         "titulo": titulo,
         "bien": get_bien,
+        "comentarios": get_comentarios
     }
-    return render(request, "AppCoder/detalle_bien.html",context=context)     
+    return render(request, "AppCoder/detalle_bien.html",context=context) 
+
+@login_required
+def comentar_bien(request,titulo):
+    bien = Bien.objects.get(titulo=titulo)
+    if request.method == 'POST':
+        mensaje = request.POST.get('mensaje')
+        comentario = Comentario(
+            bien = bien,
+            mensaje = mensaje,
+            usuario = request.user
+        )
+        
+        comentario.save()
+        return redirect('AppCoderDetalleBien', titulo=titulo)
+
+    return render(request, 'comentar_bien.html', {'bien': bien})
+    
 
 
     
@@ -104,20 +121,6 @@ def crear_bien1(request, titulo, subtitulo):
     context = { "titulo": titulo}
     return render(request, "AppCoder/save_bien.html", context=context)
 
-def comentarios(request):
-    if request.method == "POST":
-        formComent= ComentForm(request.POST)
-        
-        if formComent.is_valid():
-            informacion = formComent.cleaned_data
-            coment_save = Comentario(comentario=informacion["comentario"],
-                                   usuario = informacion["usuario"]
-                                   )
-            coment_save.save()
-    all_coment = Comentario.objects.all()
-    context = {"comentario": all_coment,
-               "form": ComentForm()}
-    return render(request, "AppCoder/comentarios.html", context=context)
 
 def panel_admin(request):
     return redirect('/admin/login/?next=/admin/')
@@ -126,3 +129,9 @@ def about(request):
     return render(request, 'about.html', {})
 
 
+def mensajes(request):
+    mensajes_recibidos = Mensaje.objects.filter(usuario_recibe=request.user)
+    context = {
+        "mensajes": mensajes_recibidos,
+    }
+    return render(request, "AppCoder/mensajes.html", context=context)

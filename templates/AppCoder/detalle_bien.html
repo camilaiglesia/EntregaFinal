@@ -1,17 +1,25 @@
 {% extends 'base.html' %}
 
 {% block contenido_cambia %}
-<form action= "{% url "AppCoderDetalleBien" titulo %}" method= "post" enctype="multipart/form-data"> 
-    <br>{% csrf_token %}</br>
-   <b> Titulo: </b>{{bien.titulo}}<br><b>Subtitulo: </b>{{bien.subtitulo}}<br><b>Descripcion:</b> {{bien.descripcion}}<br><b>Imagen:</b><br> 
-{% if bien.imagen %}
+<b> Titulo: </b>{{bien.titulo}}<br>
+  <b>Subtitulo: </b>{{bien.subtitulo}}<br>
+  <b>Descripcion:</b> {{bien.descripcion}}<br>
+  <b>Imagen:</b><br> 
+  {% if bien.imagen %}
     <p><img src="{{bien.imagen.url}}" alt=""></p>
-{% endif %}
-<b>Comentarios:</b>{{bien.comentario}}<br>
-<textarea name="comentario" rows="4" cols="50"></textarea>
-<br><input type="submit" value="Comentar"></br>
-
+  {% endif %}
+    {% for comentario in comentarios  %}
+    <h5>{{comentario.usuario}}: {{comentario.fecha_envio}}</h5>
+    <p>{{comentario.mensaje}} </p>
+    <hr>
+    
+    {% endfor %}
+  <form action="{% url 'AppCoderComentarBien' titulo %}" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  
+  
+  <textarea name="mensaje" rows="4" cols="50"></textarea>
+  <br>
+  <input type="submit" value="Comentar">
 </form>
-
-
 {% endblock %}

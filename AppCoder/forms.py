@@ -17,6 +17,6 @@ class BusquedaBienForm(forms.Form):
   
     
 class ComentForm(forms.Form):
-    comentario = forms.CharField(max_length=200)
+    mensaje = forms.CharField(max_length=200)
     
    

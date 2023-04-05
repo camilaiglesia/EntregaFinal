@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block contenido_cambia %}
+  <h1>Mensajes</h1>
+  {% if mensajes %}
+    <ul>
+      {% for mensaje in mensajes %}
+        <li>
+          De: {{ mensaje.usuario_envia.username }}
+          <br>
+          {{ mensaje.mensaje }}
+          <br>
+          {{ mensaje.fecha_envio }}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No tienes mensajes</p>
+  {% endif %}
+{% endblock %}
