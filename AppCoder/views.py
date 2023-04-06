@@ -93,7 +93,7 @@ def editar_bien(request,titulo):
             get_bien.imagen = informacion["imagen"] 
                  
             get_bien.save()
-            return redirect("AppCoderProfile")
+            return redirect("AppCoderBienes")
            
     context = {
         "titulo": titulo,
