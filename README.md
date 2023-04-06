@@ -15,4 +15,7 @@ Este es un proyecto de software que se utiliza para la compra y venta de product
 <b>Instalacion<br></b>
 Descarga el repositorio del proyecto desde GitHub.
 
+<b>Explicacion del funcionamiento<br></b>
+https://youtu.be/MzBb9t0U6q4
+
 
