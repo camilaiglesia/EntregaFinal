@@ -4,11 +4,10 @@ from django.contrib.auth.models import User
 
 class UserRegisterForm(UserCreationForm):
     email= forms.EmailField()
-    imagen= forms.ImageField()
     
     class Meta:
         model = User
-        fields = ("username", "email", "imagen")
+        fields = ("username", "email")
         
 class UserEditForm(forms.ModelForm):
     imagen= forms.ImageField()
