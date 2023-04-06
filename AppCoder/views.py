@@ -2,7 +2,7 @@ from audioop import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from AppCoder.models import  Bien, Comentario
-from AppCoder.forms import BienForm, ComentForm, BusquedaBienForm
+from AppCoder.forms import BienForm, BusquedaBienForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from account.models import Avatar
@@ -128,10 +128,3 @@ def panel_admin(request):
 def about(request):
     return render(request, 'about.html', {})
 
-
-def mensajes(request):
-    mensajes_recibidos = Mensaje.objects.filter(usuario_recibe=request.user)
-    context = {
-        "mensajes": mensajes_recibidos,
-    }
-    return render(request, "AppCoder/mensajes.html", context=context)

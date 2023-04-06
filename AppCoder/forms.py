@@ -15,8 +15,4 @@ class BusquedaBienForm(forms.Form):
     titulo = forms.CharField(min_length=2, max_length=50)
     
   
-    
-class ComentForm(forms.Form):
-    mensaje = forms.CharField(max_length=200)
-    
    
